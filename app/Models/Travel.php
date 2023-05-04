@@ -13,7 +13,8 @@ class Travel extends Model
 
         'title',
         'producer',
-        'description'
+        'description',
+        'cover'
     ];
      protected $table = 'travels';
 

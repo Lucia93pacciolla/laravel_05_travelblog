@@ -8,7 +8,7 @@
         @foreach($travels as $travel)
     
         <div class="card">
-             <img src="https://picsum.photos/300" class="card-img-top" alt="...">
+             <img src="{{Storage::url($travel->cover)}}" class="card-img-top" alt="...">
              <div class="card-body">
                  <h5 class="card-title">{{ $travel->title }}</h5>
                  <p class="small fst-italic text-muted">{{ $travel->producer }}</p>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Travel;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TravelRequest;
+
 
 class TravelController extends Controller
 {
@@ -12,7 +14,9 @@ class TravelController extends Controller
         return view('travel.create');
     }
 
-    public function store (Request $request){
+    public function store (TravelRequest $request){
+
+        
 
         // $travel = new Travel();
         // $travel->title = $request->title;
@@ -27,7 +31,8 @@ class TravelController extends Controller
 
             'title' => $request->title,
             'producer' => $request->producer,
-            'description' => $request->description
+            'description' => $request->description,
+            'cover'=> $request->file('cover')->store('public/covers'),
         ]);
 
         return redirect(route('homepage'))->with('travelCreate', 'viaggio inserito');
@@ -41,4 +46,6 @@ class TravelController extends Controller
 
         return view('travel.index', compact('travels'));
     }
-}
+
+
+    }
