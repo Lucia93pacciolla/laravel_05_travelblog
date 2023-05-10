@@ -15,6 +15,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('travel.index')}}">lista viaggi</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('console.create')}}">Scopri una compagnia aerea</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('console.index')}}">lista compagnie</a>
+        </li>
 
         @auth
           <li class="nav-item dropdown">
