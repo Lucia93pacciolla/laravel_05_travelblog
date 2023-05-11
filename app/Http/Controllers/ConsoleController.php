@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Console;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConsoleController extends Controller
 {
@@ -39,6 +40,7 @@ class ConsoleController extends Controller
             'name' => $request->name,
             'brand' => $request->brand,
             'description' => $request->description,
+            'user_id' => Auth::user()->id
         ]);
 
         return redirect(route('console.index'))->with('consoleCreated', 'hai scelto la tua compagnia');
@@ -58,7 +60,7 @@ class ConsoleController extends Controller
      */
     public function edit(Console $console)
     {
-        //
+        return view('console.edit', compact('console'));
     }
 
     /**
@@ -66,7 +68,14 @@ class ConsoleController extends Controller
      */
     public function update(Request $request, Console $console)
     {
-        //
+        $console->update([
+            'name' => $request->name,
+            'brand' => $request->brand,
+            'description' => $request->description,
+
+        ]);
+
+        return redirect(route('console.index'))->with('consoleUpdated', 'Aggiornato correttamente');
     }
 
     /**
@@ -74,6 +83,8 @@ class ConsoleController extends Controller
      */
     public function destroy(Console $console)
     {
-        //
+        $console->delete();
+
+        return redirect(route('console.index'))->with('consoleDeleted', 'Eliminato correttamente');
     }
 }
