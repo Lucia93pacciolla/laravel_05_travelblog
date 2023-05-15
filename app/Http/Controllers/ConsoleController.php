@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Travel;
 use App\Models\Console;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,20 +29,25 @@ class ConsoleController extends Controller
      */
     public function create()
     {
-        return view('console.create');
+        $travels = Travel::all();
+        return view('console.create', compact('travels'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+
     {
+        
         $console = Console::create([
             'name' => $request->name,
             'brand' => $request->brand,
             'description' => $request->description,
             'user_id' => Auth::user()->id
         ]);
+
+         $console->travels()->attach($request->travels);
 
         return redirect(route('console.index'))->with('consoleCreated', 'hai scelto la tua compagnia');
     }
@@ -60,7 +66,8 @@ class ConsoleController extends Controller
      */
     public function edit(Console $console)
     {
-        return view('console.edit', compact('console'));
+        $travel = Travel::all();
+        return view('console.edit', compact('console', 'travels'));
     }
 
     /**
@@ -75,6 +82,7 @@ class ConsoleController extends Controller
 
         ]);
 
+        $console->travels()->attach($request->travels);
         return redirect(route('console.index'))->with('consoleUpdated', 'Aggiornato correttamente');
     }
 
@@ -83,6 +91,13 @@ class ConsoleController extends Controller
      */
     public function destroy(Console $console)
     {
+        foreach($console->travels as $travel){
+
+            $console->travels()->detach($travel->id);        
+        }
+
+        
+
         $console->delete();
 
         return redirect(route('console.index'))->with('consoleDeleted', 'Eliminato correttamente');

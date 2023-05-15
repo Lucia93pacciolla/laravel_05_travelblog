@@ -33,6 +33,22 @@
                         <input type="text" name="brand" class="form-control" id="brand" value="{{ $console->brand }}">       
                     </div>
 
+                    <div class="mb-3">
+                        <label for="" class="form-label">Compagnie disponibili</label>
+
+                        @foreach($travels->diff($console->tralels) as $travel)
+                            <input 
+
+                            type="checkbox" 
+                            id="{{$travel->id}}" 
+                            name="travels[]" 
+                            value="{{$travel->id}}">
+                            
+                            <label for="{{$travel->id}}"> {{$travel->title}}</label><br>
+                        @endforeach
+                            
+                    </div>
+
                     {{-- <div class="mb-3">
                         <label for="cover" class="form-label">copertina</label>
                         <input type="file" name="cover" class="form-control" id="cover">                       

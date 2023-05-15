@@ -1,5 +1,7 @@
 <x-layout header='con quale compagnia vuoi viaggiare'>
 
+    
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
@@ -29,6 +31,22 @@
                     <div class="mb-3">
                         <label for="brand" class="form-label">brand</label>
                         <input type="text" name="brand" class="form-control" id="brand" value="{{ old('brand') }}">       
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Compagnie disponibili</label>
+
+                        @foreach($travels as $travel)
+                            <input 
+
+                            type="checkbox" 
+                            id="{{$travel->id}}" 
+                            name="travels[]" 
+                            value="{{$travel->id}}">
+                            
+                            <label for="{{$travel->id}}"> {{$travel->title}}</label><br>
+                        @endforeach
+                            
                     </div>
 
                     {{-- <div class="mb-3">

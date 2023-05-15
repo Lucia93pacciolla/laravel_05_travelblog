@@ -24,4 +24,9 @@ class Console extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function travels(){
+
+        return $this->belongsToMany(Travel::class);
+    }
 }

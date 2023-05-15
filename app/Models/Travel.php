@@ -18,5 +18,10 @@ class Travel extends Model
     ];
      protected $table = 'travels';
 
+
+     public function consoles(){
+
+        return $this->belongsToMany(Console::class);
+     }
     
 }
